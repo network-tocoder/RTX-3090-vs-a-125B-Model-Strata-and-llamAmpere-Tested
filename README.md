@@ -187,12 +187,10 @@ Every run, including the failed and warm-up ones, is in [`results.jsonl`](result
 
 | File | What |
 |---|---|
-| `bench.py` | Benchmark script |
-| `run-llamampere.sh` | llamAmpere launcher with both fixes |
-| `results.jsonl` | Every run, both engines |
-| `logs/llamampere-*.log` | llamAmpere server logs (32K, 128K, 256K, claim test, each fix) |
-| `logs/strata-*.txt` | Strata plan, self-tuning and engine output (PCIe probe, drafts accepted) |
-
+| [`bench.py`](bench.py) | Benchmark script |
+| [`run-llamampere.sh`](run-llamampere.sh) | llamAmpere launcher with both fixes |
+| [`results.jsonl`](results.jsonl) | Every run, both engines |
+| [`logs/llamampere-32k.log`](logs/llamampere-32k.log) | ... |
 ---
 
 ## Notes
