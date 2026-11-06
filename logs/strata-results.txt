@@ -1,0 +1,24 @@
+# Strata 0.1.56 - benchmark output and engine log (transcribed from terminal)
+
+## Round 1: short question
+$ python3 ~/bench/bench.py strata-mtp 0 512      (run twice)
+{"engine": "strata-mtp", "prompt_tokens": 69, "output_tokens": 512, "ttft_s": 0.5, "prefill_tps": 137.1, "decode_tps": 118.5, "temp": 0.0}
+{"engine": "strata-mtp", "prompt_tokens": 69, "output_tokens": 512, "ttft_s": 0.1, "prefill_tps": 667.3, "decode_tps": 118.0, "temp": 0.0}
+
+$ grep -iE "tok/s|tokens/s|best|chosen|tuned|winner" ~/.local/state/strata/launch/iq3_xxs-32k.engine.log | tail -20
+strata generate: PCIe probe: 26.3 GB/s host->device (best of 25.6 26.0 26.3 26.3) -> pcie frac 0.55 (default 0.55)
+strata serve: prompt 53 tokens = 0 reused + 53 read in 414 ms (128.1 tok/s), 1 generated in 32 ms (31.0 tok/s), drafts accepted 0 of 0, 1 checkpoints
+strata serve: prompt 69 tokens = 0 reused + 69 read in 485 ms (142.3 tok/s), 512 generated in 4327 ms (118.3 tok/s), drafts accepted 300 of 399, 1 checkpoints
+strata serve: prompt 69 tokens = 64 reused + 5 read in 87 ms (57.4 tok/s), 512 generated in 4341 ms (117.9 tok/s), drafts accepted 267 of 362, 1 checkpoints
+
+## Round 2: ~100K prompt (run twice) + claim test
+$ python3 ~/bench/bench.py strata-mtp 100000 512
+$ python3 ~/bench/bench.py strata-mtp 100000 512
+$ python3 ~/bench/bench.py strata-mtp-claim 100000 5120 1.0 23
+{"engine": "strata-mtp", "prompt_tokens": 102471, "output_tokens": 512, "ttft_s": 44.0, "prefill_tps": 2330.1, "decode_tps": 96.9, "temp": 0.0}
+{"engine": "strata-mtp", "prompt_tokens": 102471, "output_tokens": 512, "ttft_s": 45.1, "prefill_tps": 2274.1, "decode_tps": 98.0, "temp": 0.0}
+{"engine": "strata-mtp-claim", "prompt_tokens": 102471, "output_tokens": 5120, "ttft_s": 44.1, "prefill_tps": 2322.1, "decode_tps": 101.3, "temp": 1.0}
+
+## Round 3: ~250K prompt (run twice) - see results.jsonl
+{"engine": "strata-mtp", "prompt_tokens": 249035, "output_tokens": 512, "ttft_s": 120.7, "prefill_tps": 2064.1, "decode_tps": 89.5, "temp": 0.0}
+{"engine": "strata-mtp", "prompt_tokens": 249035, "output_tokens": 512, "ttft_s": 118.1, "prefill_tps": 2107.8, "decode_tps": 89.9, "temp": 0.0}

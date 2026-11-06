@@ -183,28 +183,10 @@ Update the path to the C++ source file at the top of the script to match your ma
 
 ## 4. Raw results
 
-Every run, including the failed and warm-up ones, is in [`results.jsonl`](results.jsonl).
-Full server logs for every llamAmpere run, plus Strata's plan, tuning and engine output, are in [`logs/`](logs/).
+Every run, including the failed and warm-up ones, is in [`results.jsonl`](results.jsonl). Full server logs for every llamAmpere run, plus Strata's plan, tuning and engine output, are in [`logs/`](logs/).
 
 | File | What |
 |---|---|
-| [`bench.py`](bench.py) | Benchmark script |
-| [`run-llamampere.sh`](run-llamampere.sh) | llamAmpere launcher with both fixes |
-| [`results.jsonl`](results.jsonl) | Every run, both engines |
-| [`logs/llamampere-32k.log`](logs/llamampere-32k.log) | llamAmpere, short question, default settings (~51 tok/s) |
-| [`logs/llamampere-32k-nocap.log`](logs/llamampere-32k-nocap.log) | Same, with no memory limit (ruled out RAM) |
-| [`logs/llamampere-32k-t16.log`](logs/llamampere-32k-t16.log) | Same, with 16 threads (ruled out threads) |
-| [`logs/llamampere-32k-nosplit.log`](logs/llamampere-32k-nosplit.log) | Fix 1: `GGML_MOE_CPU_SPLIT=0` (96.7 tok/s) |
-| [`logs/llamampere-128k.log`](logs/llamampere-128k.log) | 100K prompt, default batch (463.6 s to read) |
-| [`logs/llamampere-128k-ub4096.log`](logs/llamampere-128k-ub4096.log) | Fix 2: `-ub 4096` (165.9 s to read) |
-| [`logs/llamampere-128k-claim.log`](logs/llamampere-128k-claim.log) | Claim test (96.33 tok/s, drafts accepted 0.62) |
-| [`logs/llamampere-256k.log`](logs/llamampere-256k.log) | ~250K prompt, out of VRAM |
-| [`logs/llamampere-256k-ub2048.log`](logs/llamampere-256k-ub2048.log) | ~250K with `-ub 2048`, same error |
-| [`logs/strata-plan.txt`](logs/strata-plan.txt) | Strata plan preview ("Nothing was changed") |
-| [`logs/strata-launch-tuning.txt`](logs/strata-launch-tuning.txt) | Strata first launch and self-tuning |
-| [`logs/strata-results.txt`](logs/strata-results.txt) | Strata results, PCIe probe, drafts accepted 300 of 399 |
-
----|---|
 | `bench.py` | Benchmark script |
 | `run-llamampere.sh` | llamAmpere launcher with both fixes |
 | `results.jsonl` | Every run, both engines |

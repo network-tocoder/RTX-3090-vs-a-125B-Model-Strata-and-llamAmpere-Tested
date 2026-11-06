@@ -1,0 +1,95 @@
+0.00.137.319 I FYI: mode-biased MTP (--spec-mb-mtp) is on by default with MTP drafting. To turn it off: --no-spec-mb-mtp
+0.00.137.406 I srv  llama_server: initializing ...
+0.00.137.420 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.138.030 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.00.160.888 I srv    load_model: loading model '/models/swift-fn/Swift-Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00001-of-00002.gguf'
+0.05.982.164 I common_moe_cache_plan_fit: MoE cache fit: some routed expert weights would remain permanently uncached
+0.05.982.186 I cmn  common_init_: AI+ compact verification off: fit must guarantee at least 300 MiB of free device memory
+1.12.906.893 I cmn          init: llama threadpool init, n_threads = 30
+1.12.908.818 W create: [PLEPF] mapped reads use random-access mapping
+1.12.908.822 W create: [PLEPF] PLE prefetch on: 2 threads, page faults, calls of 256+ tokens, 1000000 tokens ahead
+1.12.926.982 W llama_b1: [B1] layer-major prefill ready: 144 expert tensors in 3 roles, 0 of 48 layers resident, slot 1137.5 MiB, 8 copy threads x 2 x 0.88 MiB pinned, 0 resident tensors lendable
+1.13.007.759 W [kqtc] on: q4_K 1 q5_K 1 q6_K 1 iq3_s 0, min_n 2, warps 4, q8 cache 1, max rows 0
+1.13.859.915 I common_speculative_init_result: MTP draft context uses the draft-only vocabulary shortlist 'auto'
+1.13.859.924 I common_speculative_init_result: draft KV cache: K = tq5_0 (SJ-KVaRN trunk default), V = turbo4 (SJ-KVaRN trunk default)
+1.13.859.924 I common_speculative_init_result: loading draft model '/models/drafter/mtp-Swift-Qwen3.8-Flash-Next-GSQ-RCO-Q2S-B.gguf'
+1.14.879.853 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 32768, kv_unified = 'false'
+1.14.879.953 I spec common_specu: exact p/q drafting enabled (default; LLAMA_SPEC_PQ=0 disables): draft tokens are sampled at the request's temperature and verified by rejection sampling
+1.14.895.552 W mtp_handoff_init: LLAMA_MTP_B1_HANDOFF=1: per-ubatch device handoff on (staged 0, cpu 0, events 1, arch ok 1, nextn 0, type 0, devices 1)
+1.14.895.941 W create: [PLEPF] LLAMA_PLE_PREFETCH is set but this model has no lazily mapped qwen4exp PLE table, off
+1.14.906.820 W b1_prepare: [B1] LLAMA_B1 is set but layer-major prefill is off: this is a draft (MTP) context; only the main context reads prompts layer-major
+1.14.923.388 I srv    load_model: prompt cache is disabled (explicit setting or RAM fit)
+1.14.923.399 I srv    load_model: all model and context allocations ready; loading expert usage profile
+1.15.803.809 W srv    operator(): [FNGUARD] WARNING threads differ from 64 physical cores; set -t 64 -tb 64
+1.15.803.819 W srv    operator(): [FNGUARD] WARNING draft threads differ from 64 physical cores; set -td 64 -tbd 64
+1.15.803.826 W srv    operator(): [FNGUARD] WARNING prompt batch 2048 is smaller than slot context 32768: at least 16 prompt passes; raise -b
+1.15.803.828 W srv    operator(): [FNGUARD] WARNING prompt ubatch 512 is below 4096; raise -ub
+1.15.804.183 W srv    operator(): [FNGUARD] WARNING host experts need 119.74 GiB, available RAM/job headroom is 23.34 GiB; disk paging is likely
+1.15.808.765 W srv    operator(): [FNGUARD] WARNING model disk speed is unknown (not a local block device): /models/drafter/mtp-Swift-Qwen3.8-Flash-Next-GSQ-RCO-Q2S-B.gguf
+1.15.808.821 W srv    operator(): [FNGUARD] WARNING model disk speed is unknown (not a local block device): /models/swift-fn/Swift-Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00001-of-00002.gguf
+1.15.808.868 W srv    operator(): [FNGUARD] WARNING model disk speed is unknown (not a local block device): /models/swift-fn/Swift-Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00002-of-00002.gguf
+1.15.808.957 I srv  server_setup: [FNGUARD] effective setup: guarded=1 cache=on cache_MiB=16588.60 cache_status=1 B1=on passes_min=16 passes_basis=slot-context B1_groups=runtime threads=30/30 draft_threads=30/30 physical_cores=64 batch=2048 ubatch=512 context=32768 draft=GPU KV=sjkvarn4/sjkvarn4:scalar(staging:tq6_0/tq6_0,sink:f16,edge:0@4/4:scalar) draft_KV=tq5_0/turbo4 warnings=8
+1.15.808.987 W srv          init: idle-slot prompt saves are off while the prompt RAM cache is disabled
+1.15.821.558 W srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+1.15.821.642 I srv  llama_server: model loaded
+1.15.821.654 I srv  llama_server: listening on http://127.0.0.1:8080
+1.15.821.655 W srv  llama_server: notice: server default port will be changed to :9931 in a future release (ref: https://github.com/ggml-org/llama.cpp/pull/26508)
+1.47.892.429 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+1.47.892.623 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+1.47.892.741 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 0, batch 2048, ubatch 512, tail 5, draft state 0
+1.49.330.555 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 89, batch 2048, ubatch 512, tail 5, draft state 0
+[moe-cpu-split] pool: 63 threads, pinned to cpus 63,62,61,60,59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0 (skipped cores at cpus 23), spin 250000 us, nap 1000 us, rows up/gate 16 down 64, Q2_0 down fast path
+[moe-cpu-split] input Q8 reuse on, IQ token group 8, IQ4_NL down reuse on
+[moe-cpu-split] probe phases (mean us, quantize x / up+gate / quantize hidden / down): 1 expert 816.4 163.4 6.3 21.7, 4 experts 9.8 67.0 6.3 56.0
+[moe-cpu-split] probe on layer 0: empty job 3.5 us, 1 expert 64.1 us, 4 experts 125.1 us -> 20.3 us per (expert, route) + 43.7 us per job
+[moe-cpu-split] probe check: 1.87 MB per expert, 29.2 GB/s for 1 expert, 59.8 GB/s for 4; pool waited for a cpu 6.3% of the time
+1.49.602.546 I [moe-cache] device tables active: 144 tensors, 0 MiB mapped existing pages, 1224 KiB device tables; stable slots with boundary adaptation; no per-layer host routing or result copies
+1.49.795.514 I [moe-cache] device routes: hits=2274 misses=3486 dispatches=144; graph snapshot scopes=1 (diagnostic sync) sync_us=74187
+1.49.801.008 I [moe-cache] whole swap initial: complete=10171 partial=0 layers=48
+1.49.920.276 I [moe-cache] swap update: scope=2 swaps=177 evictions=177 candidates=703 pairs=495 bytes=99456000 host_ms=6.896
+1.52.818.763 I slot print_timing: id  0 | task 0 | n_gen =    127, tg =  41.91 t/s, tg_3s =  42.24 t/s
+1.54.113.032 I [moe-cache] device routes: hits=366738 misses=53742 dispatches=9216; graph snapshot scopes=64 (diagnostic sync) sync_us=19601
+1.55.828.939 I slot print_timing: id  0 | task 0 | n_gen =    256, tg =  42.38 t/s, tg_3s =  42.85 t/s
+1.57.600.992 I [moe-cache] device routes: hits=723036 misses=76164 dispatches=18432; graph snapshot scopes=128 (diagnostic sync) sync_us=76338
+1.58.895.691 I slot print_timing: id  0 | task 0 | n_gen =    415, tg =  45.58 t/s, tg_3s =  51.85 t/s
+2.00.629.234 I slot print_timing: id  0 | task 0 | prompt eval time =    1919.71 ms /    93 tokens (   20.64 ms per token,    48.44 tokens per second)
+2.00.629.239 I slot print_timing: id  0 | task 0 |        eval time =   10816.84 ms /   512 tokens (   21.17 ms per token,    47.24 tokens per second)
+2.00.629.240 I slot print_timing: id  0 | task 0 |       total time =   12736.55 ms /   605 tokens
+2.00.629.246 I slot print_timing: id  0 | task 0 |    graphs reused =        166
+2.00.629.251 I slot print_timing: id  0 | task 0 | draft acceptance = 0.55337 (  337 accepted /   609 generated), mean len =  2.94
+2.00.629.267 I slot print_timing: id  0 | task 0 |  round cost by draft width = (w1: 1 rounds, 2.00 tok/round, 97.82 ms/round (draft 0.81, verify 96.03, other 0.98), 20.4 tok/s; w3: 84 rounds, 2.52 tok/round, 57.03 ms/round (draft 5.37, verify 51.06, other 0.59), 44.3 tok/s; w4: 89 rounds, 3.34 tok/round, 66.61 ms/round (draft 4.65, verify 61.28, other 0.69), 50.1 tok/s)
+2.00.629.339 I slot      release: id  0 | task 0 | stop processing: n_tokens = 604, truncated = 0
+2.00.810.062 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.602 (> 0.100 thold), f_keep = 0.093
+2.00.810.263 I slot launch_slot_: id  0 | task 177 | processing task, is_child = 0
+2.00.811.059 I slot   operator(): id  0 | task 177 | B1 checkpoint plan: start 0, batch 2048, ubatch 512, tail 5, draft state 0
+2.01.889.120 I slot   operator(): id  0 | task 177 | B1 checkpoint plan: start 89, batch 2048, ubatch 512, tail 5, draft state 0
+2.03.007.870 I [moe-cache] device routes: hits=1120815 misses=117585 dispatches=27504; graph snapshot scopes=192 (diagnostic sync) sync_us=75790
+2.04.996.730 I slot print_timing: id  0 | task 177 | n_gen =    146, tg =  47.70 t/s, tg_3s =  48.02 t/s
+2.06.621.417 I [moe-cache] device routes: hits=1477722 misses=148038 dispatches=36720; graph snapshot scopes=256 (diagnostic sync) sync_us=19411
+2.08.012.751 I slot print_timing: id  0 | task 177 | n_gen =    286, tg =  47.06 t/s, tg_3s =  46.42 t/s
+2.09.904.275 I [moe-cache] device routes: hits=1826499 misses=167901 dispatches=45936; graph snapshot scopes=320 (diagnostic sync) sync_us=74157
+2.11.019.359 I slot print_timing: id  0 | task 177 | n_gen =    454, tg =  49.98 t/s, tg_3s =  55.88 t/s
+2.12.008.004 I slot print_timing: id  0 | task 177 | prompt eval time =    1146.29 ms /    93 tokens (   12.33 ms per token,    81.13 tokens per second)
+2.12.008.008 I slot print_timing: id  0 | task 177 |        eval time =   10051.38 ms /   512 tokens (   19.67 ms per token,    50.84 tokens per second)
+2.12.008.009 I slot print_timing: id  0 | task 177 |       total time =   11197.67 ms /   605 tokens
+2.12.008.011 I slot print_timing: id  0 | task 177 |    graphs reused =        335
+2.12.008.016 I slot print_timing: id  0 | task 177 | draft acceptance = 0.59292 (  335 accepted /   565 generated), mean len =  2.90
+2.12.008.026 I slot print_timing: id  0 | task 177 |  round cost by draft width = (w3: 139 rounds, 2.75 tok/round, 54.47 ms/round (draft 7.84, verify 46.10, other 0.53), 50.5 tok/s; w4: 37 rounds, 3.49 tok/round, 67.03 ms/round (draft 2.74, verify 63.64, other 0.65), 52.0 tok/s)
+2.12.008.077 I slot      release: id  0 | task 177 | stop processing: n_tokens = 604, truncated = 0
+4.42.536.111 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.591 (> 0.100 thold), f_keep = 0.091
+4.42.536.227 I slot launch_slot_: id  0 | task 356 | processing task, is_child = 0
+4.42.537.082 I slot   operator(): id  0 | task 356 | B1 checkpoint plan: start 0, batch 2048, ubatch 512, tail 5, draft state 0
+4.43.587.651 I slot   operator(): id  0 | task 356 | B1 checkpoint plan: start 89, batch 2048, ubatch 512, tail 5, draft state 0
+4.45.509.124 I [moe-cache] device routes: hits=2211297 misses=200703 dispatches=55008; graph snapshot scopes=384 (diagnostic sync) sync_us=76298
+4.46.701.905 I slot print_timing: id  0 | task 356 | n_gen =    142, tg =  46.18 t/s, tg_3s =  46.51 t/s
+4.48.913.912 I [moe-cache] device routes: hits=2563215 misses=217425 dispatches=64224; graph snapshot scopes=448 (diagnostic sync) sync_us=18925
+4.49.705.864 I slot print_timing: id  0 | task 356 | n_gen =    278, tg =  45.73 t/s, tg_3s =  45.27 t/s
+4.52.133.335 I [moe-cache] device routes: hits=2917110 misses=232170 dispatches=73440; graph snapshot scopes=512 (diagnostic sync) sync_us=19832
+4.52.707.690 I slot print_timing: id  0 | task 356 | n_gen =    421, tg =  46.36 t/s, tg_3s =  47.64 t/s
+4.54.303.637 I slot print_timing: id  0 | task 356 | prompt eval time =    1112.33 ms /    93 tokens (   11.96 ms per token,    83.61 tokens per second)
+4.54.303.643 I slot print_timing: id  0 | task 356 |        eval time =   10655.02 ms /   512 tokens (   20.85 ms per token,    47.96 tokens per second)
+4.54.303.644 I slot print_timing: id  0 | task 356 |       total time =   11767.35 ms /   605 tokens
+4.54.303.645 I slot print_timing: id  0 | task 356 |    graphs reused =        517
+4.54.303.651 I slot print_timing: id  0 | task 356 | draft acceptance = 0.52632 (  320 accepted /   608 generated), mean len =  2.68
+4.54.303.663 I slot print_timing: id  0 | task 356 |  round cost by draft width = (w3: 156 rounds, 2.54 tok/round, 53.57 ms/round (draft 3.78, verify 49.31, other 0.48), 47.4 tok/s; w4: 35 rounds, 3.29 tok/round, 65.66 ms/round (draft 4.29, verify 60.76, other 0.60), 50.0 tok/s)
+4.54.303.710 I slot      release: id  0 | task 356 | stop processing: n_tokens = 604, truncated = 0

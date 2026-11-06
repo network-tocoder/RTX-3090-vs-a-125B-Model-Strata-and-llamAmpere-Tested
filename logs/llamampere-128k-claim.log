@@ -1,0 +1,175 @@
+0.00.135.701 I FYI: mode-biased MTP (--spec-mb-mtp) is on by default with MTP drafting. To turn it off: --no-spec-mb-mtp
+0.00.135.778 I srv  llama_server: initializing ...
+0.00.135.791 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.136.399 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.00.159.345 I srv    load_model: loading model '/models/swift-fn/Swift-Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00001-of-00002.gguf'
+0.05.897.833 I common_moe_cache_plan_fit: MoE cache fit: some routed expert weights would remain permanently uncached
+0.05.897.857 I cmn  common_init_: AI+ compact verification off: fit must guarantee at least 300 MiB of free device memory
+1.12.701.013 I cmn          init: llama threadpool init, n_threads = 30
+1.12.702.957 W create: [PLEPF] mapped reads use random-access mapping
+1.12.702.961 W create: [PLEPF] PLE prefetch on: 2 threads, page faults, calls of 256+ tokens, 1000000 tokens ahead
+1.12.720.522 W llama_b1: [B1] layer-major prefill ready: 144 expert tensors in 3 roles, 0 of 48 layers resident, slot 1137.5 MiB, 8 copy threads x 2 x 0.88 MiB pinned, 0 resident tensors lendable
+1.12.804.308 W [kqtc] on: q4_K 1 q5_K 1 q6_K 1 iq3_s 0, min_n 2, warps 4, q8 cache 1, max rows 0
+1.13.504.191 I common_speculative_init_result: MTP draft context uses the draft-only vocabulary shortlist 'auto'
+1.13.504.210 I common_speculative_init_result: draft KV cache: K = tq5_0 (SJ-KVaRN trunk default), V = turbo4 (SJ-KVaRN trunk default)
+1.13.504.210 I common_speculative_init_result: loading draft model '/models/drafter/mtp-Swift-Qwen3.8-Flash-Next-GSQ-RCO-Q2S-B.gguf'
+1.14.581.531 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 131072, kv_unified = 'false'
+1.14.581.659 I spec common_specu: exact p/q drafting enabled (default; LLAMA_SPEC_PQ=0 disables): draft tokens are sampled at the request's temperature and verified by rejection sampling
+1.14.596.706 W mtp_handoff_init: LLAMA_MTP_B1_HANDOFF=1: per-ubatch device handoff on (staged 0, cpu 0, events 1, arch ok 1, nextn 0, type 0, devices 1)
+1.14.597.825 W create: [PLEPF] LLAMA_PLE_PREFETCH is set but this model has no lazily mapped qwen4exp PLE table, off
+1.14.610.050 W b1_prepare: [B1] LLAMA_B1 is set but layer-major prefill is off: this is a draft (MTP) context; only the main context reads prompts layer-major
+1.14.649.878 I srv    load_model: prompt cache is disabled (explicit setting or RAM fit)
+1.14.649.891 I srv    load_model: all model and context allocations ready; loading expert usage profile
+1.15.692.694 W srv    operator(): [FNGUARD] WARNING threads differ from 64 physical cores; set -t 64 -tb 64
+1.15.692.704 W srv    operator(): [FNGUARD] WARNING draft threads differ from 64 physical cores; set -td 64 -tbd 64
+1.15.692.708 W srv    operator(): [FNGUARD] WARNING prompt batch 4096 is smaller than slot context 131072: at least 32 prompt passes; raise -b
+1.15.693.044 W srv    operator(): [FNGUARD] WARNING host experts need 119.74 GiB, available RAM/job headroom is 23.27 GiB; disk paging is likely
+1.15.695.215 W srv    operator(): [FNGUARD] WARNING model disk speed is unknown (not a local block device): /models/drafter/mtp-Swift-Qwen3.8-Flash-Next-GSQ-RCO-Q2S-B.gguf
+1.15.695.243 W srv    operator(): [FNGUARD] WARNING model disk speed is unknown (not a local block device): /models/swift-fn/Swift-Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00001-of-00002.gguf
+1.15.695.265 W srv    operator(): [FNGUARD] WARNING model disk speed is unknown (not a local block device): /models/swift-fn/Swift-Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00002-of-00002.gguf
+1.15.695.312 I srv  server_setup: [FNGUARD] effective setup: guarded=1 cache=on cache_MiB=16311.35 cache_status=1 B1=on passes_min=32 passes_basis=slot-context B1_groups=runtime threads=30/30 draft_threads=30/30 physical_cores=64 batch=4096 ubatch=4096 context=131072 draft=GPU KV=sjkvarn4/sjkvarn4:scalar(staging:tq6_0/tq6_0,sink:f16,edge:0@4/4:scalar) draft_KV=tq5_0/turbo4 warnings=7
+1.15.695.332 W srv          init: idle-slot prompt saves are off while the prompt RAM cache is disabled
+1.15.701.088 W srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+1.15.701.135 I srv  llama_server: model loaded
+1.15.701.140 I srv  llama_server: listening on http://127.0.0.1:8080
+1.15.701.141 W srv  llama_server: notice: server default port will be changed to :9931 in a future release (ref: https://github.com/ggml-org/llama.cpp/pull/26508)
+1.20.297.980 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+1.20.298.225 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+1.20.298.633 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 0, batch 4096, ubatch 4096, tail 5, draft state 0
+1.27.986.882 W stop: [PLEPF] 4096 tokens: 32633 pages (127 MiB) in 31934 reads, guessed in 4.2 ms, 32633 read, last read at 56.8 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=01.27.994.680 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+1.27.994.836 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   4096, progress = 0.04, t =   7.70 s / 532.19 tokens per second
+1.27.995.055 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 4096, batch 4096, ubatch 4096, tail 5, draft state 0
+1.34.194.426 W stop: [PLEPF] 4096 tokens: 31765 pages (124 MiB) in 31086 reads, guessed in 5.7 ms, 31765 read, last read at 31.5 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=01.34.202.423 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+1.34.202.887 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   8192, progress = 0.08, t =  13.90 s / 589.18 tokens per second
+1.34.203.129 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 8192, batch 4096, ubatch 4096, tail 5, draft state 0
+1.40.601.898 W stop: [PLEPF] 4096 tokens: 34664 pages (135 MiB) in 33953 reads, guessed in 6.0 ms, 34664 read, last read at 10.2 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=01.40.609.892 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+1.40.610.680 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  12288, progress = 0.12, t =  20.31 s / 604.97 tokens per second
+1.40.610.920 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 12288, batch 4096, ubatch 4096, tail 5, draft state 0
+1.47.073.217 W stop: [PLEPF] 4096 tokens: 32010 pages (125 MiB) in 31335 reads, guessed in 5.8 ms, 32010 read, last read at 9.9 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=01.47.081.775 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+1.47.081.912 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  16384, progress = 0.16, t =  26.78 s / 611.72 tokens per second
+1.47.082.160 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 16384, batch 4096, ubatch 4096, tail 5, draft state 0
+1.53.753.898 W stop: [PLEPF] 4096 tokens: 31756 pages (124 MiB) in 31077 reads, guessed in 5.8 ms, 31756 read, last read at 8.6 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=01.53.762.319 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+1.53.762.491 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  20480, progress = 0.20, t =  33.46 s / 612.00 tokens per second
+1.53.763.048 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 20480, batch 4096, ubatch 4096, tail 5, draft state 0
+2.00.439.666 W stop: [PLEPF] 4096 tokens: 34599 pages (135 MiB) in 33889 reads, guessed in 6.3 ms, 34599 read, last read at 11.0 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=02.00.447.646 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+2.00.447.784 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  24576, progress = 0.24, t =  40.15 s / 612.11 tokens per second
+2.00.448.015 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 24576, batch 4096, ubatch 4096, tail 5, draft state 0
+2.07.202.934 W stop: [PLEPF] 4096 tokens: 32017 pages (125 MiB) in 31343 reads, guessed in 5.8 ms, 32017 read, last read at 9.9 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=02.07.211.715 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+2.07.212.263 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  28672, progress = 0.28, t =  46.91 s / 611.17 tokens per second
+2.07.212.498 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 28672, batch 4096, ubatch 4096, tail 5, draft state 0
+2.14.102.704 W stop: [PLEPF] 4096 tokens: 31716 pages (124 MiB) in 31037 reads, guessed in 5.7 ms, 31716 read, last read at 10.2 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=02.14.110.642 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+2.14.110.780 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  32768, progress = 0.32, t =  53.81 s / 608.93 tokens per second
+2.14.111.041 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 32768, batch 4096, ubatch 4096, tail 5, draft state 0
+[G16] sjkvarn_prefill: sparse tile (4,16)
+2.20.362.504 W stop: [PLEPF] 4096 tokens: 34582 pages (135 MiB) in 33873 reads, guessed in 6.1 ms, 34582 read, last read at 10.7 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=02.20.370.880 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+2.20.371.637 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  36864, progress = 0.36, t =  60.07 s / 613.66 tokens per second
+2.20.371.896 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 36864, batch 4096, ubatch 4096, tail 5, draft state 0
+2.26.617.174 W stop: [PLEPF] 4096 tokens: 32017 pages (125 MiB) in 31341 reads, guessed in 5.8 ms, 32017 read, last read at 9.8 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=02.26.625.607 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+2.26.626.038 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  40960, progress = 0.40, t =  66.33 s / 617.54 tokens per second
+2.26.626.289 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 40960, batch 4096, ubatch 4096, tail 5, draft state 0
+2.32.972.471 W stop: [PLEPF] 4096 tokens: 31661 pages (124 MiB) in 30983 reads, guessed in 5.7 ms, 31661 read, last read at 10.1 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=02.32.980.800 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+2.32.980.937 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  45056, progress = 0.44, t =  72.68 s / 619.90 tokens per second
+2.32.981.184 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 45056, batch 4096, ubatch 4096, tail 5, draft state 0
+2.39.231.251 W stop: [PLEPF] 4096 tokens: 34622 pages (135 MiB) in 33911 reads, guessed in 6.0 ms, 34622 read, last read at 10.1 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=02.39.239.308 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+2.39.239.445 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  49152, progress = 0.48, t =  78.94 s / 622.64 tokens per second
+2.39.239.761 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 49152, batch 4096, ubatch 4096, tail 5, draft state 0
+2.45.497.288 W stop: [PLEPF] 4096 tokens: 31976 pages (125 MiB) in 31299 reads, guessed in 5.9 ms, 31976 read, last read at 9.6 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=02.45.505.947 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+2.45.506.082 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  53248, progress = 0.52, t =  85.21 s / 624.92 tokens per second
+2.45.506.334 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 53248, batch 4096, ubatch 4096, tail 5, draft state 0
+2.51.861.696 W stop: [PLEPF] 4096 tokens: 31661 pages (124 MiB) in 30983 reads, guessed in 5.8 ms, 31661 read, last read at 9.7 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=02.51.870.012 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+2.51.870.150 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  57344, progress = 0.56, t =  91.57 s / 626.22 tokens per second
+2.51.870.442 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 57344, batch 4096, ubatch 4096, tail 5, draft state 0
+2.58.189.204 W stop: [PLEPF] 4096 tokens: 34671 pages (135 MiB) in 33958 reads, guessed in 6.1 ms, 34671 read, last read at 10.8 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=02.58.197.771 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+2.58.197.911 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  61440, progress = 0.60, t =  97.90 s / 627.58 tokens per second
+2.58.198.155 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 61440, batch 4096, ubatch 4096, tail 5, draft state 0
+3.04.552.721 W stop: [PLEPF] 4096 tokens: 31976 pages (125 MiB) in 31299 reads, guessed in 5.8 ms, 31976 read, last read at 9.5 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=03.04.561.289 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+3.04.561.398 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  65536, progress = 0.64, t = 104.26 s / 628.56 tokens per second
+3.04.561.644 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 65536, batch 4096, ubatch 4096, tail 5, draft state 0
+3.11.026.295 W stop: [PLEPF] 4096 tokens: 31589 pages (123 MiB) in 30911 reads, guessed in 5.7 ms, 31589 read, last read at 10.0 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=03.11.035.267 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+3.11.035.405 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  69632, progress = 0.68, t = 110.74 s / 628.81 tokens per second
+3.11.035.657 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 69632, batch 4096, ubatch 4096, tail 5, draft state 0
+3.17.405.256 W stop: [PLEPF] 4096 tokens: 34722 pages (136 MiB) in 34006 reads, guessed in 6.1 ms, 34722 read, last read at 10.8 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=03.17.413.798 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+3.17.413.907 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  73728, progress = 0.72, t = 117.12 s / 629.53 tokens per second
+3.17.414.157 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 73728, batch 4096, ubatch 4096, tail 5, draft state 0
+3.23.780.109 W stop: [PLEPF] 4096 tokens: 31943 pages (125 MiB) in 31267 reads, guessed in 5.7 ms, 31943 read, last read at 9.9 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=03.23.789.391 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+3.23.789.859 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  77824, progress = 0.76, t = 123.49 s / 630.20 tokens per second
+3.23.790.119 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 77824, batch 4096, ubatch 4096, tail 5, draft state 0
+3.30.279.958 W stop: [PLEPF] 4096 tokens: 31589 pages (123 MiB) in 30911 reads, guessed in 5.7 ms, 31589 read, last read at 10.0 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=03.30.289.013 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+3.30.289.673 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  81920, progress = 0.80, t = 129.99 s / 630.20 tokens per second
+3.30.289.925 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 81920, batch 4096, ubatch 4096, tail 5, draft state 0
+3.36.689.202 W stop: [PLEPF] 4096 tokens: 34722 pages (136 MiB) in 34006 reads, guessed in 6.1 ms, 34722 read, last read at 10.0 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=03.36.697.612 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+3.36.697.750 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  86016, progress = 0.84, t = 136.40 s / 630.62 tokens per second
+3.36.698.018 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 86016, batch 4096, ubatch 4096, tail 5, draft state 0
+3.43.132.509 W stop: [PLEPF] 4096 tokens: 31911 pages (125 MiB) in 31234 reads, guessed in 6.0 ms, 31911 read, last read at 9.6 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=03.43.141.823 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+3.43.141.959 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  90112, progress = 0.88, t = 142.84 s / 630.84 tokens per second
+3.43.142.347 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 90112, batch 4096, ubatch 4096, tail 5, draft state 0
+3.49.691.180 W stop: [PLEPF] 4096 tokens: 31549 pages (123 MiB) in 30872 reads, guessed in 5.9 ms, 31549 read, last read at 10.0 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=03.49.699.709 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+3.49.699.837 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  94208, progress = 0.92, t = 149.40 s / 630.57 tokens per second
+3.49.700.077 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 94208, batch 4096, ubatch 4096, tail 5, draft state 0
+3.56.169.289 W stop: [PLEPF] 4096 tokens: 34730 pages (136 MiB) in 34014 reads, guessed in 6.0 ms, 34730 read, last read at 10.7 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=03.56.178.617 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+3.56.178.760 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  98304, progress = 0.96, t = 155.88 s / 630.64 tokens per second
+3.56.179.006 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 98304, batch 4096, ubatch 4096, tail 5, draft state 0
+4.02.775.591 W stop: [PLEPF] 4096 tokens: 31895 pages (125 MiB) in 31218 reads, guessed in 5.8 ms, 31895 read, last read at 9.9 ms; 2 ubatches waited 0.0 ms in all, 2 readers; bulk mapped runs=0; direct mapped runs=04.02.784.055 W srv        decode: ubatch handoff: helper caught up 4096 of 4096 rows during the decode
+4.02.784.606 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens = 102400, progress = 1.00, t = 162.49 s / 630.21 tokens per second
+4.02.784.636 I slot   operator(): id  0 | task 0 | B1 checkpoint plan: start 102400, batch 4096, ubatch 4096, tail 5, draft state 0
+4.06.171.161 I [moe-cache] CUDA0 global profile same-session replan: budget=17056896000 actual_bytes=17052364800; idle tables released, shrink before grow
+4.06.953.795 I spec   pq_sampler: seq 0: p/q draft sampler rebuilt: temp=1.00 top_k=20 top_p=0.95 min_p=0.05
+4.06.996.909 I [moe-cache] device tables active: 144 tensors, 0 MiB mapped existing pages, 1224 KiB device tables; stable slots with boundary adaptation; no per-layer host routing or result copies
+4.07.075.484 I [moe-cache] device routes: hits=2862 misses=2898 dispatches=144; graph snapshot scopes=1 (diagnostic sync) sync_us=24083
+4.07.080.147 I [moe-cache] whole swap initial: complete=10000 partial=0 layers=48
+4.07.136.891 I [moe-cache] swap update: scope=2 swaps=171 evictions=171 candidates=791 pairs=324 bytes=100019200 host_ms=6.107
+4.09.044.778 I [moe-cache] device routes: hits=329604 misses=39036 dispatches=9216; graph snapshot scopes=64 (diagnostic sync) sync_us=23970
+4.09.948.702 I slot print_timing: id  0 | task 0 | n_gen =    250, tg =  83.00 t/s, tg_3s =  83.33 t/s
+4.10.936.960 I [moe-cache] device routes: hits=681858 misses=55422 dispatches=18432; graph snapshot scopes=128 (diagnostic sync) sync_us=23453
+4.12.828.022 I [moe-cache] device routes: hits=1031484 misses=74436 dispatches=27648; graph snapshot scopes=192 (diagnostic sync) sync_us=26854
+4.12.974.230 I slot print_timing: id  0 | task 0 | n_gen =    536, tg =  88.79 t/s, tg_3s =  94.53 t/s
+4.14.750.676 I [moe-cache] device routes: hits=1379943 misses=94617 dispatches=36864; graph snapshot scopes=256 (diagnostic sync) sync_us=23619
+4.15.979.779 I slot print_timing: id  0 | task 0 | n_gen =    849, tg =  93.90 t/s, tg_3s = 104.14 t/s
+4.16.841.833 I [moe-cache] device routes: hits=1772655 misses=118065 dispatches=46080; graph snapshot scopes=320 (diagnostic sync) sync_us=27364
+4.18.762.739 I [moe-cache] device routes: hits=2130612 misses=134508 dispatches=55296; graph snapshot scopes=384 (diagnostic sync) sync_us=23411
+4.18.995.711 I slot print_timing: id  0 | task 0 | n_gen =   1134, tg =  94.05 t/s, tg_3s =  94.50 t/s
+4.20.679.153 I [moe-cache] device routes: hits=2478291 misses=155469 dispatches=64512; graph snapshot scopes=448 (diagnostic sync) sync_us=33189
+4.22.000.933 I slot print_timing: id  0 | task 0 | n_gen =   1432, tg =  95.07 t/s, tg_3s =  99.16 t/s
+4.22.579.954 I [moe-cache] device routes: hits=2824542 misses=177858 dispatches=73728; graph snapshot scopes=512 (diagnostic sync) sync_us=23065
+4.24.559.520 I [moe-cache] device routes: hits=3202284 misses=196116 dispatches=82944; graph snapshot scopes=576 (diagnostic sync) sync_us=23402
+4.25.001.983 I slot print_timing: id  0 | task 0 | n_gen =   1728, tg =  95.66 t/s, tg_3s =  98.63 t/s
+4.26.445.141 I [moe-cache] device routes: hits=3554574 misses=212466 dispatches=92160; graph snapshot scopes=640 (diagnostic sync) sync_us=24251
+4.28.030.621 I slot print_timing: id  0 | task 0 | n_gen =   2001, tg =  94.87 t/s, tg_3s =  90.14 t/s
+4.28.592.147 I [moe-cache] device routes: hits=3955065 misses=229575 dispatches=101376; graph snapshot scopes=704 (diagnostic sync) sync_us=26850
+4.30.467.298 I [moe-cache] device routes: hits=4307484 misses=245796 dispatches=110592; graph snapshot scopes=768 (diagnostic sync) sync_us=22800
+4.31.047.437 I slot print_timing: id  0 | task 0 | n_gen =   2277, tg =  94.44 t/s, tg_3s =  91.49 t/s
+4.32.352.031 I [moe-cache] device routes: hits=4659945 misses=261975 dispatches=119808; graph snapshot scopes=832 (diagnostic sync) sync_us=23255
+4.34.061.860 I slot print_timing: id  0 | task 0 | n_gen =   2568, tg =  94.68 t/s, tg_3s =  96.54 t/s
+4.34.233.561 I [moe-cache] device routes: hits=5013207 misses=277353 dispatches=129024; graph snapshot scopes=896 (diagnostic sync) sync_us=23934
+4.36.234.639 I [moe-cache] device routes: hits=5378124 misses=298356 dispatches=138240; graph snapshot scopes=960 (diagnostic sync) sync_us=23532
+4.37.084.994 I slot print_timing: id  0 | task 0 | n_gen =   2882, tg =  95.60 t/s, tg_3s = 103.87 t/s
+4.38.092.749 I [moe-cache] device routes: hits=5727924 misses=317196 dispatches=147456; graph snapshot scopes=1024 (diagnostic sync) sync_us=24573
+4.40.107.534 I slot print_timing: id  0 | task 0 | n_gen =   3188, tg =  96.11 t/s, tg_3s = 101.24 t/s
+4.40.140.239 I [moe-cache] device routes: hits=6102678 misses=339882 dispatches=156672; graph snapshot scopes=1088 (diagnostic sync) sync_us=27756
+4.42.218.814 I [moe-cache] device routes: hits=6491493 misses=364347 dispatches=165888; graph snapshot scopes=1152 (diagnostic sync) sync_us=23325
+4.43.133.064 I slot print_timing: id  0 | task 0 | n_gen =   3503, tg =  96.78 t/s, tg_3s = 104.11 t/s
+4.44.151.883 I [moe-cache] device routes: hits=6837438 misses=387042 dispatches=175104; graph snapshot scopes=1216 (diagnostic sync) sync_us=40945
+4.46.030.076 I [moe-cache] device routes: hits=7189131 misses=403989 dispatches=184320; graph snapshot scopes=1280 (diagnostic sync) sync_us=23010
+4.46.149.303 I slot print_timing: id  0 | task 0 | n_gen =   3804, tg =  97.01 t/s, tg_3s =  99.79 t/s
+4.47.889.480 I [moe-cache] device routes: hits=7538052 misses=423708 dispatches=193536; graph snapshot scopes=1344 (diagnostic sync) sync_us=24187
+4.49.172.151 I slot print_timing: id  0 | task 0 | n_gen =   4070, tg =  96.37 t/s, tg_3s =  88.00 t/s
+4.49.802.931 I [moe-cache] device routes: hits=7889430 misses=440970 dispatches=202752; graph snapshot scopes=1408 (diagnostic sync) sync_us=22757
+4.51.707.691 I [moe-cache] device routes: hits=8236713 misses=462327 dispatches=211968; graph snapshot scopes=1472 (diagnostic sync) sync_us=25122
+4.52.199.680 I slot print_timing: id  0 | task 0 | n_gen =   4361, tg =  96.35 t/s, tg_3s =  96.12 t/s
+4.53.538.790 I [moe-cache] device routes: hits=8592768 misses=474912 dispatches=221184; graph snapshot scopes=1536 (diagnostic sync) sync_us=23619
+4.55.200.886 I slot print_timing: id  0 | task 0 | n_gen =   4641, tg =  96.16 t/s, tg_3s =  93.30 t/s
+4.55.523.996 I [moe-cache] device routes: hits=8961315 misses=493725 dispatches=230400; graph snapshot scopes=1600 (diagnostic sync) sync_us=23008
+4.57.469.684 I [moe-cache] device routes: hits=9305496 misses=518184 dispatches=239616; graph snapshot scopes=1664 (diagnostic sync) sync_us=23842
+4.58.209.026 I slot print_timing: id  0 | task 0 | n_gen =   4943, tg =  96.41 t/s, tg_3s = 100.39 t/s
+4.59.396.562 I [moe-cache] device routes: hits=9648987 misses=543333 dispatches=248832; graph snapshot scopes=1728 (diagnostic sync) sync_us=25733
+5.00.089.281 I slot print_timing: id  0 | task 0 | prompt eval time =  166650.40 ms / 102471 tokens (    1.63 ms per token,   614.89 tokens per second)
+5.00.089.286 I slot print_timing: id  0 | task 0 |        eval time =   53140.59 ms /  5120 tokens (   10.38 ms per token,    96.33 tokens per second)
+5.00.089.287 I slot print_timing: id  0 | task 0 |       total time =  219791.00 ms / 107591 tokens
+5.00.089.294 I slot print_timing: id  0 | task 0 |    graphs reused =       1712
+5.00.089.298 I slot print_timing: id  0 | task 0 | draft acceptance = 0.62099 ( 3367 accepted /  5422 generated), mean len =  2.92
+5.00.089.310 I slot print_timing: id  0 | task 0 |  round cost by draft width = (w3: 1586 rounds, 2.89 tok/round, 29.77 ms/round (draft 3.19, verify 26.05, other 0.53), 97.0 tok/s; w4: 166 rounds, 3.26 tok/round, 35.69 ms/round (draft 4.24, verify 30.84, other 0.61), 91.3 tok/s)
+5.00.089.314 I slot print_timing: id  0 | task 0 | spec pq: n=4327 match=2447 extra=667 rej=960 mean_p_d=0.5684 mean_summin=0.7195
+5.00.092.348 I slot      release: id  0 | task 0 | stop processing: n_tokens = 107590, truncated = 0
+7.07.418.705 I srv    operator(): operator(): cleaning up before exit...
+7.07.623.692 I [moe-cache] device routes: hits=9782670 misses=547890 dispatches=252288; no host routing syncs
+7.07.623.706 I [moe-cache] missjoin final: dispatches=252288 distinct_experts=7076415 distinct_misses=177132 staged=177132 miss_routes=230130 unstaged=0

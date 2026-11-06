@@ -1,0 +1,9 @@
+# Strata 0.1.56 - first launch, self-tuning (transcribed from terminal)
+| Checking the engine for this computer
+| Engine 0.1.56 (cuda) is installed. 100%
+| Swift IQ3_XXS is already installed with these choices. 100%
+| Writing this launch's settings
+| Settings are saved.
+| Trying: Allocate the conversation memory as it grows (round 1 of 3) 10%
+| Measuring your current settings again (round 2 of 3) 25%
+| Measuring your current settings once more to check the PC did not drift 45%

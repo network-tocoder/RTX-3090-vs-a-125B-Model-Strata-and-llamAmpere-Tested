@@ -1,0 +1,12 @@
+# Strata 0.1.56 - plan preview (transcribed from terminal)
+$ strata launch --model-path /models/swift-fn --context 32k --vision off --drafting mtp --tune quick --plan
+These files are swift IQ3_XXS.
+
+Plan for "IQ3_XXS 32K":
+  model     Swift 1.5 IQ3_XXS, 76 GB (your files in /models/swift-fn)
+  context   32K    pictures off    parallel fit to your card
+  download  About 5.2 GB to download: the draft layer (5.2 GB). Your model files are used where they are. To skip the draft layer (a little slower, less memory), add --mtp off. The engine for your graphics card is downloaded first (from the update source; its size is shown when it starts).
+  drafting  MTP
+  tuning    quick    access This computer only, port 8080
+  same as   strata launch --model-path "/models/swift-fn" --model iq3_xxs --family swift --context 32k --vision off --drafting mtp --tune quick --access local --port 8080
+Nothing was changed.
