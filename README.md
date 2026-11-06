@@ -17,7 +17,7 @@ Two engines, one machine, the same model files and the same prompts.
 
 This repo has everything from the video: the setup, both llamAmpere fixes, the benchmark script and my raw results.
 
-📺 [![Subscribe](https://img.shields.io/badge/Subscribe-NetworkCoder-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@NetworkCoder?sub_confirmation=1)
+[![Video](https://img.shields.io/badge/Subscribe-NetworkCoder-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=M-otTni5kuo)
 
 ---
 
