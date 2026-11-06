@@ -1,5 +1,15 @@
 # RTX 3090 vs a 125B Model: Strata and llamAmpere, Tested
 
+![Tested on](https://img.shields.io/badge/TESTED%20ON-RTX%203090%2024GB-76b900?style=for-the-badge&logo=nvidia&logoColor=white)
+![Model](https://img.shields.io/badge/MODEL-Qwen3.8%20Flash--Next%20125B-6f42c1?style=for-the-badge)
+![Quant](https://img.shields.io/badge/QUANT-IQ3__XXS%2076%20GB-orange?style=for-the-badge)
+![RAM](https://img.shields.io/badge/RAM-64%20GB-blue?style=for-the-badge)
+![Power](https://img.shields.io/badge/POWER-260%20W-lightgrey?style=for-the-badge)
+
+![Strata](https://img.shields.io/badge/STRATA-118.5%20tok%2Fs-2ea44f?style=for-the-badge)
+![llamAmpere](https://img.shields.io/badge/LLAMAMPERE-96.7%20tok%2Fs-1f6feb?style=for-the-badge)
+[![Subscribe](https://img.shields.io/badge/SUBSCRIBE-NETWORK%20CODER-ff0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@networkcoder)
+
 A six-year-old RTX 3090, 64 GB of system RAM and a 125-billion-parameter model.
 Two engines, one machine, the same model files and the same prompts.
 
