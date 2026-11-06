@@ -46,6 +46,27 @@ Both engines used **the exact same model files**. Each used its own small "draft
 
 ---
 
+## 0. Download the model (same files for both engines)
+
+```bash
+pip install -U "huggingface_hub[cli]"
+
+# Main model: Swift 1.5 Qwen3.8 Flash-Next, IQ3_XXS (~76 GB, 2 files)
+huggingface-cli download ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF \
+  --include "*IQ3_XXS*" --local-dir /models/swift-fn
+
+# llamAmpere's draft helper (~1.5 GB). Strata downloads its own draft layer itself.
+huggingface-cli download jakeatx/Swift-1.5-Qwen3.8-Flash-Next-MTP-Drafter-GGUF \
+  mtp-Swift-Qwen3.8-Flash-Next-GSQ-RCO-Q2S-B.gguf --local-dir /models/drafter
+```
+
+- Model page: https://huggingface.co/ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF
+- Drafter page: https://huggingface.co/jakeatx/Swift-1.5-Qwen3.8-Flash-Next-MTP-Drafter-GGUF
+
+If the files sit in a subfolder after download, move both `IQ3_XXS` parts into `/models/swift-fn`.
+
+---
+
 ## 1. Strata
 
 Install (one line, Linux/macOS):
@@ -57,7 +78,7 @@ curl -fsSL https://github.com/Niko1221/Strata/releases/latest/download/install.s
 Preview what it will do first (changes nothing):
 
 ```bash
-strata launch --plan --family qwen --model q2_0
+strata launch --model-path /models/swift-fn --context 32k --vision off --drafting mtp --tune quick --plan
 ```
 
 Launch used in the test:
@@ -69,6 +90,14 @@ strata launch --model-path "/models/swift-fn" --model iq3_xxs --family swift \
 
 On first start it tunes itself: it measures your machine, picks settings, then measures again. Keep the machine quiet while it does this.
 Loading 76 GB of model into 64 GB of RAM takes about a minute.
+
+Strata's own log, with the PCIe probe and draft acceptance (300 of 399 accepted = 75%), is here:
+
+```bash
+grep -iE "tok/s|PCIe|drafts" ~/.local/state/strata/launch/iq3_xxs-32k.engine.log | tail -20
+```
+
+Full output: [`logs/strata-plan.txt`](logs/strata-plan.txt), [`logs/strata-launch-tuning.txt`](logs/strata-launch-tuning.txt), [`logs/strata-results.txt`](logs/strata-results.txt).
 
 ---
 
@@ -154,14 +183,33 @@ Update the path to the C++ source file at the top of the script to match your ma
 
 ## 4. Raw results
 
-Every run, including the failed and warm-up ones, is in [`results.jsonl`](results.jsonl). Full server logs for every llamAmpere run are in [`logs/`](logs/).
+Every run, including the failed and warm-up ones, is in [`results.jsonl`](results.jsonl).
+Full server logs for every llamAmpere run, plus Strata's plan, tuning and engine output, are in [`logs/`](logs/).
 
 | File | What |
 |---|---|
+| [`bench.py`](bench.py) | Benchmark script |
+| [`run-llamampere.sh`](run-llamampere.sh) | llamAmpere launcher with both fixes |
+| [`results.jsonl`](results.jsonl) | Every run, both engines |
+| [`logs/llamampere-32k.log`](logs/llamampere-32k.log) | llamAmpere, short question, default settings (~51 tok/s) |
+| [`logs/llamampere-32k-nocap.log`](logs/llamampere-32k-nocap.log) | Same, with no memory limit (ruled out RAM) |
+| [`logs/llamampere-32k-t16.log`](logs/llamampere-32k-t16.log) | Same, with 16 threads (ruled out threads) |
+| [`logs/llamampere-32k-nosplit.log`](logs/llamampere-32k-nosplit.log) | Fix 1: `GGML_MOE_CPU_SPLIT=0` (96.7 tok/s) |
+| [`logs/llamampere-128k.log`](logs/llamampere-128k.log) | 100K prompt, default batch (463.6 s to read) |
+| [`logs/llamampere-128k-ub4096.log`](logs/llamampere-128k-ub4096.log) | Fix 2: `-ub 4096` (165.9 s to read) |
+| [`logs/llamampere-128k-claim.log`](logs/llamampere-128k-claim.log) | Claim test (96.33 tok/s, drafts accepted 0.62) |
+| [`logs/llamampere-256k.log`](logs/llamampere-256k.log) | ~250K prompt, out of VRAM |
+| [`logs/llamampere-256k-ub2048.log`](logs/llamampere-256k-ub2048.log) | ~250K with `-ub 2048`, same error |
+| [`logs/strata-plan.txt`](logs/strata-plan.txt) | Strata plan preview ("Nothing was changed") |
+| [`logs/strata-launch-tuning.txt`](logs/strata-launch-tuning.txt) | Strata first launch and self-tuning |
+| [`logs/strata-results.txt`](logs/strata-results.txt) | Strata results, PCIe probe, drafts accepted 300 of 399 |
+
+---|---|
 | `bench.py` | Benchmark script |
 | `run-llamampere.sh` | llamAmpere launcher with both fixes |
 | `results.jsonl` | Every run, both engines |
 | `logs/llamampere-*.log` | llamAmpere server logs (32K, 128K, 256K, claim test, each fix) |
+| `logs/strata-*.txt` | Strata plan, self-tuning and engine output (PCIe probe, drafts accepted) |
 
 ---
 
