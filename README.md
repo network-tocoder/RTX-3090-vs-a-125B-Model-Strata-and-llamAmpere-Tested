@@ -17,7 +17,7 @@ Two engines, one machine, the same model files and the same prompts.
 
 This repo has everything from the video: the setup, both llamAmpere fixes, the benchmark script and my raw results.
 
-📺 Video: *[link]* · Channel: [Network Coder](https://www.youtube.com/@networkcoder)
+📺 Video: *[https://www.youtube.com/watch?v=M-otTni5kuo]* · Channel: [Network Coder](https://www.youtube.com/@networkcoder)
 
 ---
 
